@@ -4,7 +4,7 @@ import players
 
 def start_game():
   print("Welcome to a game of Noughts and Crosses")
-  play_game = input("Would like to play a game? ")
+  play_game = input("Would like to play? ")
   play_game = utils.is_yes(play_game)
   if play_game:
     players.assign_players()
@@ -35,7 +35,7 @@ def start_game():
     else:
       print("Game Over")
   else:
-    print("Okay come again")
+    print("See you next time")
 
 
 start_game()
