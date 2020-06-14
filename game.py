@@ -10,11 +10,11 @@ def start_game():
     players.assign_players()
     game_over = False
     player_x_turn = False
+    player_x_won = False
+    player_o_won = False
     board.draw()
 
     while not game_over:
-      # after each turn check if anyone won
-      # if no one won call it a draw
       # end game and ask if they want to play again
       if player_x_turn:
         value = input("Your turn {} enter a number: ".format(players.player_x))
@@ -23,6 +23,7 @@ def start_game():
         while not board.position_available(value):
           value = input("{} that spot is taken try again: ".format(players.player_x))
         board.update_board(value, "X")
+        player_x_won = board.three_in_a_row("X")
         player_x_turn = False
       else:
         value = input("Your turn {} enter a number: ".format(players.player_o))
@@ -31,7 +32,21 @@ def start_game():
         while not board.position_available(value):
           value = input("{} that spot is taken try again: ".format(players.player_o))
         board.update_board(value, "O")
+        player_o_won = board.three_in_a_row("O")
         player_x_turn = True
+
+      if player_x_won:
+        print("THE WINNER IS {}".format(players.player_x))
+        game_over = True
+      elif player_o_won:
+        print("THE WINNER IS {}".format(players.player_o))
+        game_over = True
+      else: 
+        is_draw = board.is_a_draw()
+        if is_draw:
+          print("IT'S A DRAW!!")
+          game_over = True
+
     else:
       print("Game Over")
   else:
