@@ -1,8 +1,10 @@
 import utils
+import players
 
 board_state= [1,2,3,4,5,6,7,8,9]
 
 def draw():
+  print("X:{}  O:{}".format(players.player_x, players.player_o))
   for i in range(3):
     print(" --- --- --- ")
     print("| {} | {} | {} |".format(*board_state[3*i:3*i+3]))

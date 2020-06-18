@@ -15,7 +15,6 @@ def start_game():
     board.draw()
 
     while not game_over:
-      # end game and ask if they want to play again
       if player_x_turn:
         value = input("Your turn {} enter a number: ".format(players.player_x))
         while not utils.valid_number(value):
