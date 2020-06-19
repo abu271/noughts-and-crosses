@@ -2,7 +2,6 @@ import utils
 import players
 
 global board_state
-board_state = [1,2,3,4,5,6,7,8,9]
 
 def draw():
   utils.clear_screen()
