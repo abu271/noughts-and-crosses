@@ -1,3 +1,5 @@
+import random
+
 def get_player_names():
   players = {
     "player_x": '',
@@ -27,4 +29,12 @@ def valid_number(num):
       return False
   else:
     return False
-     
+
+def clear_screen():
+  print("\n" * 100)
+
+def true_or_false():
+  if random.randint(0, 1) == 0:
+    return True
+  else:
+    return False

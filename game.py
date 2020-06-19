@@ -6,12 +6,14 @@ def start_game():
   print("Welcome to a game of Noughts and Crosses")
   play_game = input("Would like to play? ")
   play_game = utils.is_yes(play_game)
-  if play_game:
+  
+  while play_game:
     players.assign_players()
     game_over = False
-    player_x_turn = False
+    player_x_turn = utils.true_or_false()
     player_x_won = False
     player_o_won = False
+    board.reset()
     board.draw()
 
     while not game_over:
@@ -46,10 +48,7 @@ def start_game():
           print("IT'S A DRAW!!")
           game_over = True
 
-    else:
-      print("Game Over")
-  else:
-    print("See you next time")
-
+    play_game = input("Would like to play again? ")
+    play_game = utils.is_yes(play_game)
 
 start_game()

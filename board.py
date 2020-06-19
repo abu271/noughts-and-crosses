@@ -1,9 +1,11 @@
 import utils
 import players
 
-board_state= [1,2,3,4,5,6,7,8,9]
+global board_state
+board_state = [1,2,3,4,5,6,7,8,9]
 
 def draw():
+  utils.clear_screen()
   print("X:{}  O:{}".format(players.player_x, players.player_o))
   for i in range(3):
     print(" --- --- --- ")
@@ -15,6 +17,10 @@ def update_board(num, value):
   index = board_state.index(num)
   board_state[index] = value
   draw()
+
+def reset():
+  global board_state
+  board_state = [1,2,3,4,5,6,7,8,9]
 
 def position_available(position):
   position = int(position)
