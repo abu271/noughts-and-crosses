@@ -1,41 +1,35 @@
 import utils
 from board import Board
+from player import Player
 
 def start_game():
   print("Welcome to a game of Noughts and Crosses")
-  play_game = input("Would like to play? ")
-  play_game = utils.is_yes(play_game)
-  board = Board()
+  play_game = utils.start_game("Would like to play? ")
   
   while play_game:
-    player_o = input("Enter player O name: ")
-    player_x = input("Enter player X name: ")
-    board.set_player_names(player_x, player_o)
-    player_x_turn = utils.true_or_false()
-    player_x_won = False
-    player_o_won = False
+    players = utils.get_names()
+    player_x = Player("X", players["X"])
+    player_o = Player("O", players["O"])
     game_over = False
+    board = Board()
     board.reset()
     board.draw()
 
     while not game_over:
-
-      if player_x_turn:
-        value = board.player_input(player_x)
-        board.update_board(value, "X")
-        player_x_won = board.three_in_a_row("X")
-        player_x_turn = False
+      if player_x.turn:
+        board.player_move(player_x)
+        player_x.won = board.three_in_a_row("X")
       else:
-        value = board.player_input(player_o)
-        board.update_board(value, "O")
-        player_o_won = board.three_in_a_row("O")
-        player_x_turn = True
+        board.player_move(player_o)
+        player_o.won = board.three_in_a_row("O")
+      
+      player_x.turn = not player_x.turn
 
-      if player_x_won:
-        print("THE WINNER IS {}".format(player_x))
+      if player_x.won:
+        utils.print_win_message(player_x.name)
         game_over = True
-      elif player_o_won:
-        print("THE WINNER IS {}".format(player_o))
+      elif player_o.won:
+        utils.print_win_message(player_o.name)
         game_over = True
       else: 
         is_draw = board.is_a_draw()
@@ -43,7 +37,6 @@ def start_game():
           print("IT'S A DRAW!!")
           game_over = True
 
-    play_game = input("Would like to play again? ")
-    play_game = utils.is_yes(play_game)
+    play_game = utils.start_game("Would like to play again? ")
 
 start_game()

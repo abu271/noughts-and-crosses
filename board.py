@@ -1,15 +1,12 @@
 import utils
-import players
 
 class Board:
   state = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  player_x = ""
-  player_o = ""
 
-  def update_board(self, num, value):
+  def update_board(self, num, player_type):
     num = int(num)
     index = Board.state.index(num)
-    Board.state[index] = value
+    Board.state[index] = player_type
     self.draw()
 
   def three_in_a_row(self, value):
@@ -22,15 +19,13 @@ class Board:
     else:
       return False
 
-  @staticmethod
-  def set_player_names(player_x, player_o):
-    Board.player_x = player_x
-    Board.player_o = player_o
+  def player_move(self, player):
+    num = self.player_input(player.name)
+    self.update_board(num, player.type)
 
   @staticmethod
   def draw():
     utils.clear_screen()
-    print("X:{}  O:{}".format(Board.player_x, Board.player_o))
     for i in range(3):
       print(" --- --- --- ")
       print("| {} | {} | {} |".format(*Board.state[3*i:3*i+3]))
@@ -40,13 +35,13 @@ class Board:
   def reset():
     Board.state = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   
-  def player_input(self, player):
-    value = input("Your turn {} enter a number: ".format(player))
-    while not utils.valid_number(value):
-      value = input("{} please enter a number: ".format(player))
-    while not self.position_available(value):
-      value = input("{} that spot is taken try again: ".format(player))
-    return value
+  def player_input(self, name):
+    num = input(f"Your turn {name} enter a number: ")
+    while not utils.valid_number(num):
+      num = input(f"{name} please enter a number: ")
+    while not self.position_available(num):
+      num = input(f"{name} that spot is taken try again: ")
+    return num
 
   @staticmethod
   def position_available(position):

@@ -28,3 +28,19 @@ def true_or_false():
     return True
   else:
     return False
+
+def start_game(text):
+  word = input(text)
+  return is_yes(word)
+
+def print_win_message(player):
+  print(f"THE WINNER IS {player}")
+
+def get_names():
+  player_o = input("Enter player O name: ")
+  player_x = input("Enter player X name: ")
+  players = {
+    "X": player_x,
+    "O": player_o
+  }
+  return players
