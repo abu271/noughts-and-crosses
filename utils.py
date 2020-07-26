@@ -16,6 +16,7 @@ def valid_number(num):
     if within_range:
       return True
     else:
+      print("Please select a number available on the board")
       return False
   else:
     return False
@@ -35,6 +36,32 @@ def start_game(text):
 
 def print_win_message(player):
   print(f"THE WINNER IS {player}")
+
+def get_column(matrix, index):
+  return [row[index] for row in matrix]
+
+def is_three(arrays, value):
+  for row in arrays:
+    if row.count(value) == 3:
+      return True
+  return False
+
+def update_matrix(matrix, num, value):
+    if num < 4:
+      matrix[0]
+      index = matrix[0].index(num)
+      matrix[0][index] = value
+      return matrix
+    elif num < 7:
+      matrix[1]
+      index = matrix[1].index(num)
+      matrix[1][index] = value
+      return matrix
+    else:
+      matrix[2]
+      index = matrix[2].index(num)
+      matrix[2][index] = value
+      return matrix
 
 def get_names():
   player_o = input("Enter player O name: ")
